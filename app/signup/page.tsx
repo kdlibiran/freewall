@@ -27,9 +27,18 @@ export default function Login() {
 
       <form
         className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-        action="/auth/sign-in"
+        action="/auth/sign-up"
         method="post"
       >
+        <label className="text-md" htmlFor="username">
+          Username
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="username"
+          placeholder="username"
+          required
+        />
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -50,16 +59,15 @@ export default function Login() {
           required
         />
         <button className="border rounded-md px-4 py-2 text-foreground mb-2">
-          Sign In
+          Sign Up
         </button>
         <div className="text-center font-thin">
-          Don't have an account?{" "}
-          <Link href="/signup" className="font-extrabold">
-            Sign Up
+          Already have an account?{" "}
+          <Link href="/login" className="font-extrabold">
+            Sign In
           </Link>{" "}
           Here
         </div>
-
         <Messages />
       </form>
     </div>
