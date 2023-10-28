@@ -25,10 +25,8 @@ export default async function Index() {
         </div>
       </nav>
 
-      <div className="w-screen  flex-col items-center justify-center align-middle">
-        <h1 className="text-[4rem] font-bold text-center mt-[13rem] font-mono">
-          Write
-        </h1>
+      <div className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+        <h1 className="text-[4rem] font-bold text-center font-mono">Write</h1>
         <h1 className="text-[4rem] font-bold text-center font-mono">
           <TypeWriter />
         </h1>
