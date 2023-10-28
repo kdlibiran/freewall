@@ -1,5 +1,7 @@
 import Topbar from "@/components/Topbar";
 import ".././globals.css";
+import { LeftSidebar } from "@/components/LeftSidebar";
+import Bottombar from "@/components/Bottombar";
 
 export const metadata = {
   title: "FreeWall",
@@ -16,7 +18,11 @@ export default function RootLayout({
       <body className="bg-background text-foreground">
         <main className="h-screen flex flex-col items-center">
           <Topbar />
-          {children}
+          <section>
+            <LeftSidebar />
+            {children}
+            <Bottombar />
+          </section>
         </main>
       </body>
     </html>
