@@ -1,7 +1,8 @@
-import AuthButton from "../components/AuthButton";
+import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import TypeWriter from "@/components/TypeWriter";
+
 export default async function Index() {
   const cookieStore = cookies();
 
