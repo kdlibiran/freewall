@@ -16,7 +16,7 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/assets/icons/plus.svg",
-    route: "/createwall",
+    route: "/wall/create",
     label: "Create Wall",
   },
   {

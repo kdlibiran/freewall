@@ -20,7 +20,7 @@ export default function RootLayout({
           <Topbar />
           <section>
             <LeftSidebar />
-            {children}
+            <div className="flex flex-1 items-center pt-16">{children}</div>
             <Bottombar />
           </section>
         </main>
