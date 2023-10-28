@@ -11,8 +11,16 @@ export default async function AuthButton() {
   } = await supabase.auth.getUser();
 
   return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
+    <div className="flex items-center gap-3">
+      <p className="hidden sm:block">hey, {user.email?.split("@")[0]}!</p>
+      <Image
+        className="sm:hidden"
+        src="assets/icons/user.svg"
+        alt="User"
+        height={18}
+        width={18}
+        style={{ filter: "invert(100%)" }}
+      />
       <form action="/auth/sign-out" method="post">
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           <Image
