@@ -16,7 +16,7 @@ export default function Bottombar() {
               alt={link.label}
               width={24}
               height={24}
-              style={{ filter: "invert(100%)" }}
+              className="icon"
             />
           </Link>
         ))}

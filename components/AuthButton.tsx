@@ -13,14 +13,9 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-3">
       <p className="hidden sm:block">hey, {user.email?.split("@")[0]}!</p>
-      <Image
-        className="sm:hidden"
-        src="assets/icons/user.svg"
-        alt="User"
-        height={18}
-        width={18}
-        style={{ filter: "invert(100%)" }}
-      />
+      <div className="w-8 h-8 bg-white rounded-full text-center flex flex-1 justify-center flex-col text-black sm:hidden font-extrabold text-xl">
+        {user.email?.split("")[0].toUpperCase()}
+      </div>
       <form action="/auth/sign-out" method="post">
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           <Image
@@ -28,8 +23,7 @@ export default async function AuthButton() {
             alt="Logout"
             height={18}
             width={18}
-            className="md:hidden"
-            style={{ filter: "invert(100%)" }}
+            className="md:hidden icon"
           />
           <p className="hidden md:block">Logout</p>
         </button>
@@ -46,7 +40,6 @@ export default async function AuthButton() {
         height={18}
         width={18}
         className="md:hidden"
-        style={{ filter: "invert(100%)" }}
       />
       <p className="hidden md:block">Login</p>
     </Link>
