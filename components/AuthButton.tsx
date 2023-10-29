@@ -9,12 +9,11 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
   return user ? (
     <div className="flex items-center gap-3">
-      <p className="hidden sm:block">hey, {user.email?.split("@")[0]}!</p>
+      <p className="hidden sm:block">hey, {user?.user_metadata.username}!</p>
       <div className="w-8 h-8 bg-white rounded-full text-center flex flex-1 justify-center flex-col text-black sm:hidden font-extrabold text-xl">
-        {user.email?.split("")[0].toUpperCase()}
+        {user?.user_metadata.username.split("")[0].toUpperCase()}
       </div>
       <form action="/auth/sign-out" method="post">
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
