@@ -39,7 +39,7 @@ export default async function AuthButton() {
         alt="Login"
         height={18}
         width={18}
-        className="md:hidden"
+        className="md:hidden icon"
       />
       <p className="hidden md:block">Login</p>
     </Link>
