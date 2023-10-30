@@ -23,16 +23,16 @@ export default async function Wall({
     .from("walls")
     .select("*,posts(*),follows(*)")
     .eq("wall_id", params.wall_id)
-    .single();
+    .order("timestamp", { foreignTable: "posts", ascending: false });
   if (error) {
     return <div>{error.message}</div>;
   }
   return (
     <div className="mt-4 sm:w-[50vw] w-[90vw]">
-      <WallDisplay wall={data} />
+      <WallDisplay wall={data[0]} />
       <Separator className="mb-3 mt-3" />
       <ScrollArea className="sm:h-[57vh] h-[35vh]">
-        {data.posts.map((post: any) => (
+        {data[0].posts.map((post: any) => (
           <div key={post.post_id}>
             <span className="text-xs text-gray-400">
               By anonymous on {new Date(post.timestamp).toLocaleString()}

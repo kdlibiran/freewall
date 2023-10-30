@@ -29,7 +29,7 @@ export default async function Home() {
   const { data, error } = await supabase
     .from("follows")
     .select("walls(*,posts(*),follows(*))")
-    .order("wall_id", { ascending: true });
+    .order("timestamp", { foreignTable: "walls.posts", ascending: false });
   const walls = data?.map((follow: any) => follow.walls);
 
   if (error) {
