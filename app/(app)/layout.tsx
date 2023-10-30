@@ -15,8 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-background text-foreground">
-        <main className="h-screen flex flex-col items-center">
+      <body className="bg-background text-foreground h-screen">
+        <main className="flex flex-col items-center">
           <Topbar />
           <section>
             <LeftSidebar />
