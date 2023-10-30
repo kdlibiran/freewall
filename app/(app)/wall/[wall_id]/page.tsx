@@ -27,7 +27,7 @@ export default async function Wall({
     return <div>{error.message}</div>;
   }
   return (
-    <div className="mt-4 w-[60vw]">
+    <div className="mt-4 sm:w-[50vw] w-[90vw]">
       <div className="flex flex-row gap-2 mb-2 align-middle">
         <div className="w-8 h-8 bg-white rounded-full flex flex-col text-center justify-center text-black font-extrabold text-xl">
           {data?.wall_name.split("")[0].toUpperCase()}
@@ -36,7 +36,7 @@ export default async function Wall({
       </div>
       <p className="text-sm">{data.wall_desc}</p>
       <Separator className="mb-3 mt-3" />
-      <ScrollArea className="h-[35vh]">
+      <ScrollArea className="sm:h-[57vh] h-[35vh]">
         {data.posts.map((post: any) => (
           <p
             key={post.post_id}

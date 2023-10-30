@@ -17,7 +17,7 @@ export default async function Walls() {
     return <div>{error.message}</div>;
   }
   return (
-    <div className="gap-2 flex flex-1 flex-col mt-4 w-full max-w-[60vw]">
+    <div className="gap-2 flex flex-1 flex-col mt-4 sm:w-[60vw] w-[90vw]">
       {data.map((wall: Wall) => (
         <Link
           href={`/wall/${wall.wall_id}`}
