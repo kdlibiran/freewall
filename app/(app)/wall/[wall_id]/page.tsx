@@ -27,7 +27,7 @@ export default async function Wall({
     return <div>{error.message}</div>;
   }
   return (
-    <div className="mt-4 w-[60vh]">
+    <div className="mt-4 w-[60vw]">
       <div className="flex flex-row gap-2 mb-2 align-middle">
         <div className="w-8 h-8 bg-white rounded-full flex flex-col text-center justify-center text-black font-extrabold text-xl">
           {data?.wall_name.split("")[0].toUpperCase()}
