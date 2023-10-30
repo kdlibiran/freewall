@@ -36,7 +36,7 @@ export default async function Wall({
       </div>
       <p className="text-sm">{data.wall_desc}</p>
       <Separator className="mb-3 mt-3" />
-      <ScrollArea className="h-[50vh]">
+      <ScrollArea className="h-[35vh]">
         {data.posts.map((post: any) => (
           <p
             key={post.post_id}
