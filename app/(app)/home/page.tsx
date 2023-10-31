@@ -43,7 +43,7 @@ export default async function Home() {
             You are not following any walls.
           </p>
           <p className="text-foreground text-xl font-thin text-center">
-            <Link href="/walls" className="font-extrabold">
+            <Link href="/search" className="font-extrabold">
               Click here
             </Link>{" "}
             to find walls to follow.
