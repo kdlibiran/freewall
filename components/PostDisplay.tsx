@@ -1,9 +1,7 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import Reply from "./Reply";
-
+import moment from "moment";
 type Post = {
   post_id: string;
   wall_id: string;
@@ -54,7 +52,7 @@ export default function WallDisplay({
           handleClick();
         }}
       >
-        {isFollowing ? "Unfollow" : "Follow"}
+        <span>{isFollowing ? "Unfollow" : "Follow"}</span>
       </button>
       <div className="flex flex-row gap-2 mb-2 justify-between">
         <div className="flex flex-row gap-3 mb-2 place-items-center">
@@ -63,7 +61,7 @@ export default function WallDisplay({
           </div>
           <h1 className="text-xs align-middle">{wall.wall_name}</h1>
           <span className="text-xxs text-gray-400">
-            By anonymous on {new Date(post.timestamp).toLocaleString()}
+            By anonymous {moment(new Date(post.timestamp)).fromNow()}
           </span>
         </div>
       </div>

@@ -42,6 +42,7 @@ export default function Reply({
           <input type="hidden" name="wall_id" value={wall_id} />
           <textarea
             value={reply}
+            placeholder="Write a reply here."
             name="reply"
             onChange={(e) => setReply(e.target.value)}
             className="border-2 border-gray-300 break-all w-full background-transparent resize-y reply"

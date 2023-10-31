@@ -1,6 +1,16 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Reply from "./Reply";
+import moment from "moment";
+
+type Reply = {
+  reply_id: string;
+  wall_id: string;
+  post_id: string;
+  parent_reply_id: string;
+  content: string;
+  timestamp: string;
+};
 
 export default async function Replies({
   post_id,
@@ -26,10 +36,10 @@ export default async function Replies({
   }
   return (
     <div>
-      {data?.map((reply: any) => (
+      {data?.map((reply: Reply) => (
         <div key={reply.reply_id} className="pl-8 mt-1">
           <span className="text-xs text-gray-400">
-            By anonymous on {new Date(reply.timestamp).toLocaleString()}
+            By anonymous {moment(new Date(reply.timestamp)).fromNow()}
           </span>
           <p className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs break-all">
             {reply.content}
