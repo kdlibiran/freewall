@@ -36,7 +36,7 @@ export default function Search() {
         placeholder="Search for walls"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="border rounded-xl w-full border-radius-2xl px-4 py-2 text-foreground mb-2 text-xs"
+        className="border rounded-xl w-full border-radius-2xl px-4 py-2 text-foreground mb-2 text-xs search"
       ></input>
       {results.map((wall: Wall) => (
         <div

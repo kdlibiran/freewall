@@ -57,7 +57,7 @@ export default function WallDisplay({
       </button>
       <div className="flex flex-row gap-2 mb-2 justify-between">
         <div className="flex flex-row gap-3 mb-2 place-items-center">
-          <div className="w-2 h-2 bg-white rounded-full flex flex-col text-center justify-center text-black font-extrabold text-xl">
+          <div className="w-5 h-5 bg-white rounded-full flex flex-col text-center justify-center text-black font-extrabold text-xl">
             {wall.wall_name.split("")[0].toUpperCase()}
           </div>
           <h1 className="text-xs align-middle">{wall.wall_name}</h1>

@@ -26,6 +26,8 @@ export default function WallDisplay({ wall }: { wall: Wall }) {
       await supabase.from("follows").insert({ wall_id: wall.wall_id });
     }
     setIsFollowing(!isFollowing);
+    //refresh
+    location.reload();
   };
   return (
     <div>

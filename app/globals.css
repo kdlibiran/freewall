@@ -17,6 +17,13 @@
       --btn-background-hover: 200 10% 12%;
       --foreground: 200 20% 96%;
     }
+    .icon {
+      filter: invert(1);
+    }
+    .search {
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+    }
   }
 }
 
