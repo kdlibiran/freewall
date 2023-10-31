@@ -2,6 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import Reply from "./Reply";
 
 type Post = {
   post_id: string;

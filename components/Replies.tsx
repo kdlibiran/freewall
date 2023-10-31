@@ -19,7 +19,8 @@ export default async function Replies({
       `post_id.eq.${post_id ?? reply_id},parent_reply_id.eq.${
         reply_id ?? post_id
       }`
-    );
+    )
+    .order("timestamp", { ascending: false });
   if (error) {
     return <div>{error.message}</div>;
   }

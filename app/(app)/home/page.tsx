@@ -1,7 +1,9 @@
 import PostDisplay from "@/components/PostDisplay";
+import Replies from "@/components/Replies";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import Reply from "@/components/Reply";
 type Post = {
   post_id: string;
   wall_id: string;
@@ -56,11 +58,18 @@ export default async function Home() {
     <div className="gap-2 flex flex-1 flex-col mt-4 sm:w-[50vw] w-[90vw]">
       {walls?.map((wall: Wall) =>
         wall.posts.map((post: Post) => (
-          <div
-            key={post.post_id}
-            className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs"
-          >
-            <PostDisplay post={post} wall={wall} />
+          <div key={post.post_id}>
+            <div className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs">
+              <PostDisplay post={post} wall={wall} />
+            </div>
+            <span className="text-xs text-gray-400">
+              <Reply
+                wall_id={wall.wall_id}
+                post_id={post.post_id}
+                parent_reply_id={null}
+              />
+            </span>
+            <Replies post_id={post.post_id} reply_id={null} />
           </div>
         ))
       )}
