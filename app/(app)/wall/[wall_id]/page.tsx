@@ -46,15 +46,12 @@ export default async function Wall({
             <p className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs break-all">
               {post.content}
             </p>
-            <span className="text-xs text-gray-400">
-              <Reply
-                wall_id={params.wall_id}
-                post_id={post.post_id}
-                parent_reply_id={null}
-              />
-            </span>
+            <Reply
+              wall_id={params.wall_id}
+              post_id={post.post_id}
+              parent_reply_id={null}
+            />
             <Replies post_id={post.post_id} reply_id={null} />
-            <p></p>
           </div>
         ))}
       </ScrollArea>

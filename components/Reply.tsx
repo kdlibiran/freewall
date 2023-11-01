@@ -1,6 +1,5 @@
 "use client";
 import { SetStateAction, useState } from "react";
-
 export default function Reply({
   post_id,
   wall_id,
@@ -12,6 +11,7 @@ export default function Reply({
 }) {
   const [input, setInput] = useState<number[]>([]);
   const [reply, setReply] = useState("");
+
   const handleAdd = () => {
     if (input.length === 0) {
       const newInput = [1];
@@ -23,9 +23,12 @@ export default function Reply({
   };
 
   return (
-    <div>
-      <button onClick={() => handleAdd()}>Reply</button>
-
+    <div className="text-xs text-gray-400">
+      <span className="flex flex-row flex-1 gap-3">
+        <button onClick={() => handleAdd()}>Reply</button>
+        <button>Like</button>
+        <button>Save</button>
+      </span>
       {input.map((i) => (
         <form
           key={i}

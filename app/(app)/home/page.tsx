@@ -69,7 +69,6 @@ export default async function Home() {
                 parent_reply_id={null}
               />
             </span>
-            <Replies post_id={post.post_id} reply_id={null} />
           </div>
         ))
       )}

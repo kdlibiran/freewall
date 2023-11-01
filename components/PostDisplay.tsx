@@ -15,8 +15,9 @@ type Wall = {
   follows: any[];
 };
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-export default function WallDisplay({
+export default function PostDisplay({
   post,
   wall,
 }: {
@@ -44,29 +45,33 @@ export default function WallDisplay({
     location.reload();
   };
   return (
-    <div>
-      <button
-        className=" border text-xxs rounded-md px-2 py-1 text-foreground mb-2 absolute right-[8vw] sm:right-[28vw]"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleClick();
-        }}
-      >
-        <span>{isFollowing ? "Unfollow" : "Follow"}</span>
-      </button>
-      <div className="flex flex-row gap-2 mb-2 justify-between">
-        <div className="flex flex-row gap-3 mb-2 place-items-center">
-          <div className="w-5 h-5 bg-white rounded-full flex flex-col text-center justify-center text-black font-extrabold text-xl">
-            {wall.wall_name.split("")[0].toUpperCase()}
+    <Link href={`/post/${post.post_id}`}>
+      <div>
+        <button
+          className=" border text-xxs rounded-md px-2 py-1 text-foreground mb-2 absolute right-[8vw] sm:right-[28vw]"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick();
+          }}
+        >
+          <span>{isFollowing ? "Unfollow" : "Follow"}</span>
+        </button>
+
+        <div className="flex flex-row gap-2 mb-2 justify-between">
+          <div className="flex flex-row gap-3 mb-2 place-items-center">
+            <div className="w-5 h-5 bg-white rounded-full flex flex-col text-center justify-center text-black font-extrabold text-xl">
+              {wall.wall_name.split("")[0].toUpperCase()}
+            </div>
+            <h1 className="text-xs align-middle">{wall.wall_name}</h1>
+            <span className="text-xxs text-gray-400 md:block hidden">
+              By anonymous {moment(new Date(post.timestamp)).fromNow()}
+            </span>
+            <span className="text-xxs text-gray-400 md:hidden">Anon</span>
           </div>
-          <h1 className="text-xs align-middle">{wall.wall_name}</h1>
-          <span className="text-xxs text-gray-400">
-            By anonymous {moment(new Date(post.timestamp)).fromNow()}
-          </span>
         </div>
+        <Separator className="mb-3 w-full" />
+        <p className="text-sm break-all">{post.content}</p>
       </div>
-      <Separator className="mb-3 w-full" />
-      <p className="text-sm break-all">{post.content}</p>
-    </div>
+    </Link>
   );
 }
