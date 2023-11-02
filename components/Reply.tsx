@@ -1,5 +1,6 @@
 "use client";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 export default function Reply({
   post_id,
   wall_id,
@@ -11,6 +12,22 @@ export default function Reply({
 }) {
   const [input, setInput] = useState<number[]>([]);
   const [reply, setReply] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
+  const supabase = createClient();
+
+  const getSaved = async () => {
+    const { data, error } = await supabase
+      .from("saves")
+      .select("*")
+      .eq("post_id", post_id);
+    if (error) {
+      console.log(error);
+    } else {
+      if (data.length > 0) {
+        setIsSaved(true);
+      }
+    }
+  };
 
   const handleAdd = () => {
     if (input.length === 0) {
@@ -22,12 +39,45 @@ export default function Reply({
     }
   };
 
+  useEffect(() => {
+    getSaved();
+  }, []);
+
+  const handleSave = async () => {
+    if (isSaved) {
+      const { data, error } = await supabase
+        .from("saves")
+        .delete()
+        .eq("post_id", post_id);
+      if (error) {
+        console.log(error);
+      } else {
+        setIsSaved(false);
+      }
+    } else {
+      const { data, error } = await supabase
+        .from("saves")
+        .insert([{ post_id: post_id }]);
+      if (error) {
+        console.log(error);
+      } else {
+        setIsSaved(true);
+      }
+    }
+  };
+
   return (
     <div className="text-xs text-gray-400">
       <span className="flex flex-row flex-1 gap-3">
         <button onClick={() => handleAdd()}>Reply</button>
-        <button>Like</button>
-        <button>Save</button>
+        {parent_reply_id === null && (
+          <span className="flex flex-row flex-1 gap-3">
+            <button>Like</button>
+            <button onClick={() => handleSave()}>
+              {isSaved ? "Unsave" : "Save"}
+            </button>
+          </span>
+        )}
       </span>
       {input.map((i) => (
         <form

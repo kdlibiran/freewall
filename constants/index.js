@@ -20,6 +20,11 @@ export const sidebarLinks = [
     label: "Create Wall",
   },
   {
+    imgURL: "/assets/icons/heart.svg",
+    route: "/saved",
+    label: "Saved Posts",
+  },
+  {
     imgURL: "/assets/icons/settings.svg",
     route: "/settings",
     label: "Settings",
