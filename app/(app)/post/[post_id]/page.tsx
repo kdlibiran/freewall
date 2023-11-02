@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import PostDisplay from "@/components/PostDisplay";
-import Reply from "@/components/Reply";
+import Actions from "@/components/Actions";
 import Replies from "@/components/Replies";
 import moment from "moment";
 type Wall = {
@@ -39,7 +39,7 @@ export default async function Post({
         <PostDisplay post={data[0]} wall={data[0].walls} />
       </div>
       <span className="text-xs text-gray-400">
-        <Reply
+        <Actions
           wall_id={data[0].wall_id}
           post_id={data[0].post_id}
           parent_reply_id={null}

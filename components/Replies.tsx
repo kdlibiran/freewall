@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import Reply from "./Reply";
+import Actions from "./Actions";
 import moment from "moment";
 
 type Reply = {
@@ -45,7 +45,7 @@ export default async function Replies({
             {reply.content}
           </p>
           <span className="text-xs text-gray-400">
-            <Reply
+            <Actions
               wall_id={reply.wall_id}
               parent_reply_id={reply.reply_id}
               post_id={null}

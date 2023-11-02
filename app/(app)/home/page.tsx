@@ -3,7 +3,7 @@ import Replies from "@/components/Replies";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import Reply from "@/components/Reply";
+import Actions from "@/components/Actions";
 type Post = {
   post_id: string;
   wall_id: string;
@@ -63,7 +63,7 @@ export default async function Home() {
               <PostDisplay post={post} wall={wall} />
             </div>
             <span className="text-xs text-gray-400">
-              <Reply
+              <Actions
                 wall_id={wall.wall_id}
                 post_id={post.post_id}
                 parent_reply_id={null}

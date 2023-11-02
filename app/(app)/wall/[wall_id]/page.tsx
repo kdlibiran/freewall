@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import WallDisplay from "@/components/WallDisplay";
-import Reply from "@/components/Reply";
+import Actions from "@/components/Actions";
 import Replies from "@/components/Replies";
 import moment from "moment";
 type Wall = {
@@ -46,7 +46,7 @@ export default async function Wall({
             <p className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs break-all">
               {post.content}
             </p>
-            <Reply
+            <Actions
               wall_id={params.wall_id}
               post_id={post.post_id}
               parent_reply_id={null}
