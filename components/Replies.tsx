@@ -4,6 +4,7 @@ import Actions from "./Actions";
 import moment from "moment";
 
 type Reply = {
+  user_id: string;
   reply_id: string;
   wall_id: string;
   post_id: string;
@@ -49,6 +50,7 @@ export default async function Replies({
               wall_id={reply.wall_id}
               parent_reply_id={reply.reply_id}
               post_id={null}
+              user_id={reply.user_id}
             />
           </span>
           <span className="text-xs text-gray-400">

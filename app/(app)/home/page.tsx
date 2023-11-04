@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import Actions from "@/components/Actions";
 type Post = {
+  user_id: string;
   post_id: string;
   wall_id: string;
   content: string;
@@ -67,6 +68,7 @@ export default async function Home() {
                 wall_id={wall.wall_id}
                 post_id={post.post_id}
                 parent_reply_id={null}
+                user_id={post.user_id}
               />
             </span>
           </div>

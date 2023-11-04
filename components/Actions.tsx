@@ -5,16 +5,27 @@ export default function Reply({
   post_id,
   wall_id,
   parent_reply_id,
+  user_id,
 }: {
   post_id: string | null;
   wall_id: string;
   parent_reply_id: string | null;
+  user_id: string;
 }) {
+  const [uid, setUid] = useState("");
   const [input, setInput] = useState<number[]>([]);
   const [reply, setReply] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const supabase = createClient();
-
+  const getUser = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    console.log(user);
+    if (user) {
+      setUid(user.id);
+    }
+  };
   const getSaved = async () => {
     const { data, error } = await supabase
       .from("saves")
@@ -41,6 +52,7 @@ export default function Reply({
 
   useEffect(() => {
     getSaved();
+    getUser();
   }, []);
 
   const handleSave = async () => {
@@ -66,10 +78,28 @@ export default function Reply({
     }
   };
 
+  const handleDelete = async () => {
+    if (post_id === null) {
+      const { data, error } = await supabase
+        .from("replies")
+        .delete()
+        .eq("reply_id", parent_reply_id);
+    } else {
+      const { data, error } = await supabase
+        .from("posts")
+        .delete()
+        .eq("post_id", post_id);
+    }
+    window.location.reload();
+  };
+
   return (
     <div className="text-xs text-gray-400">
       <span className="flex flex-row flex-1 gap-3">
         <button onClick={() => handleAdd()}>Reply</button>
+        {uid === user_id ? (
+          <button onClick={() => handleDelete()}>Delete</button>
+        ) : null}
         {parent_reply_id === null && (
           <span className="flex flex-row flex-1 gap-3">
             <button>Like</button>

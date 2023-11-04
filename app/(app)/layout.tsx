@@ -2,7 +2,6 @@ import Topbar from "@/components/Topbar";
 import ".././globals.css";
 import { LeftSidebar } from "@/components/LeftSidebar";
 import Bottombar from "@/components/Bottombar";
-
 export const metadata = {
   title: "FreeWall",
   description: "A free and open source social media platform",

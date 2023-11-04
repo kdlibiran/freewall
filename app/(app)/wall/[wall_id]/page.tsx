@@ -13,6 +13,7 @@ type Wall = {
   follows: any[];
 };
 type Post = {
+  user_id: string;
   post_id: string;
   wall_id: string;
   content: string;
@@ -50,6 +51,7 @@ export default async function Wall({
               wall_id={params.wall_id}
               post_id={post.post_id}
               parent_reply_id={null}
+              user_id={post.user_id}
             />
             <Replies post_id={post.post_id} reply_id={null} />
           </div>
