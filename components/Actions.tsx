@@ -16,12 +16,13 @@ export default function Reply({
   const [input, setInput] = useState<number[]>([]);
   const [reply, setReply] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
   const supabase = createClient();
   const getUser = async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    console.log(user);
     if (user) {
       setUid(user.id);
     }
@@ -40,6 +41,36 @@ export default function Reply({
     }
   };
 
+  const getLikes = async () => {
+    const { data: likes, error: likeserror } = await supabase
+      .from("likes")
+      .select("*")
+      .eq("post_id", post_id);
+    if (likeserror) {
+      console.log(likeserror);
+    }
+    if (likes) {
+      setLikes(likes.length);
+    }
+    const { data, error } = await supabase
+      .from("my_likes")
+      .select("*")
+      .eq("post_id", post_id);
+    if (error) {
+      console.log(error);
+    } else {
+      if (data.length > 0) {
+        setIsLiked(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getSaved();
+    getUser();
+    getLikes();
+  }, []);
+
   const handleAdd = () => {
     if (input.length === 0) {
       const newInput = [1];
@@ -49,11 +80,6 @@ export default function Reply({
       setInput(newInput);
     }
   };
-
-  useEffect(() => {
-    getSaved();
-    getUser();
-  }, []);
 
   const handleSave = async () => {
     if (isSaved) {
@@ -93,6 +119,31 @@ export default function Reply({
     window.location.reload();
   };
 
+  const handleLike = async () => {
+    if (isLiked) {
+      const { data, error } = await supabase
+        .from("likes")
+        .delete()
+        .eq("post_id", post_id);
+      if (error) {
+        console.log(error);
+      } else {
+        setIsLiked(false);
+        setLikes(likes - 1);
+      }
+    } else {
+      const { data, error } = await supabase
+        .from("likes")
+        .insert([{ post_id: post_id }]);
+      if (error) {
+        console.log(error);
+      } else {
+        setIsLiked(true);
+        setLikes(likes + 1);
+      }
+    }
+  };
+
   return (
     <div className="text-xs text-gray-400">
       <span className="flex flex-row flex-1 gap-3">
@@ -102,7 +153,9 @@ export default function Reply({
         ) : null}
         {parent_reply_id === null && (
           <span className="flex flex-row flex-1 gap-3">
-            <button>Like</button>
+            <button onClick={() => handleLike()}>
+              {isLiked ? "Unlike" : "Like"} ({likes})
+            </button>
             <button onClick={() => handleSave()}>
               {isSaved ? "Unsave" : "Save"}
             </button>
