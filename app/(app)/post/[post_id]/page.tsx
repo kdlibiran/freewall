@@ -6,6 +6,7 @@ import PostDisplay from "@/components/PostDisplay";
 import Actions from "@/components/Actions";
 import Replies from "@/components/Replies";
 import moment from "moment";
+import { redirect } from "next/navigation";
 type Wall = {
   wall_id: string;
   wall_name: string;
@@ -31,23 +32,31 @@ export default async function Post({
     .select("*,replies(*),walls(*)")
     .eq("post_id", params.post_id)
     .order("timestamp", { ascending: false });
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-  return (
-    <div className="mt-4 sm:w-[50vw] w-[90vw]">
-      <div className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs">
-        <PostDisplay post={data[0]} wall={data[0].walls} />
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    if (error) {
+      return <div>{error.message}</div>;
+    }
+    return (
+      <div className="mt-4 w-[90vw] sm:w-[50vw]">
+        <div className="text-foreground mb-2 rounded-md border px-4 py-2 text-xs">
+          <PostDisplay post={data[0]} wall={data[0].walls} />
+        </div>
+        <span className="text-xs text-gray-400">
+          <Actions
+            wall_id={data[0].wall_id}
+            post_id={data[0].post_id}
+            parent_reply_id={null}
+            user_id={data[0].user_id}
+          />
+        </span>
+        <Replies post_id={data[0].post_id} reply_id={null} />
       </div>
-      <span className="text-xs text-gray-400">
-        <Actions
-          wall_id={data[0].wall_id}
-          post_id={data[0].post_id}
-          parent_reply_id={null}
-          user_id={data[0].user_id}
-        />
-      </span>
-      <Replies post_id={data[0].post_id} reply_id={null} />
-    </div>
-  );
+    );
+  } else {
+    return redirect("/");
+  }
 }

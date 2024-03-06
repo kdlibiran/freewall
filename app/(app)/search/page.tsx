@@ -1,6 +1,7 @@
 "use client";
 import WallDisplay from "@/components/WallDisplay";
 import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 
 type Wall = {
@@ -29,19 +30,26 @@ export default function Search() {
   useEffect(() => {
     getWalls();
   }, [search]);
+  const getUser = async () => {
+    const { data: user, error } = await supabase.auth.getUser();
+    if (error) {
+      console.log(error);
+    }
+    return user;
+  };
 
   return (
-    <div className="gap-2 flex flex-1 flex-col mt-4 sm:w-[60vw] w-[90vw]">
+    <div className="mt-4 flex w-[90vw] flex-1 flex-col gap-2 sm:w-[60vw]">
       <input
         placeholder="Search for walls"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="border rounded-xl w-full border-radius-2xl px-4 py-2 text-foreground mb-2 text-xs search"
+        className="border-radius-2xl text-foreground search mb-2 w-full rounded-xl border px-4 py-2 text-xs"
       ></input>
       {results.map((wall: Wall) => (
         <div
           key={wall.wall_id}
-          className="border rounded-md px-4 py-2 text-foreground mb-2 text-xs w-full"
+          className="text-foreground mb-2 w-full rounded-md border px-4 py-2 text-xs"
         >
           <WallDisplay wall={wall} />
         </div>
