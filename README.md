@@ -1,6 +1,6 @@
 # FreeWall: Anonymous Social Media Application #
 
-FreeWall is a personal project I developed, inspired by the concept of Freedom Wall accounts on various social media platforms. It offers users the ability to express themselves anonymously through different walls, akin to subreddits, where they can post text content freely.
+FreeWall is a personal project I developed, inspired by the concept of Freedom Wall accounts on various social media platforms. It offers users the ability to express themselves anonymously through different walls where they can post text content freely.
 
 ## Key Features: ##
 
