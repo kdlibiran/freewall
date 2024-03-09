@@ -91,6 +91,7 @@ export default function Reply({
         console.log(error);
       } else {
         setIsSaved(false);
+        window.location.reload();
       }
     } else {
       const { data, error } = await supabase
@@ -100,6 +101,7 @@ export default function Reply({
         console.log(error);
       } else {
         setIsSaved(true);
+        window.location.reload();
       }
     }
   };
@@ -130,6 +132,7 @@ export default function Reply({
       } else {
         setIsLiked(false);
         setLikes(likes - 1);
+        window.location.reload();
       }
     } else {
       const { data, error } = await supabase
@@ -140,19 +143,20 @@ export default function Reply({
       } else {
         setIsLiked(true);
         setLikes(likes + 1);
+        window.location.reload();
       }
     }
   };
 
   return (
     <div className="text-xs text-gray-400">
-      <span className="flex flex-row flex-1 gap-3">
+      <span className="flex flex-1 flex-row gap-3">
         <button onClick={() => handleAdd()}>Reply</button>
         {uid === user_id ? (
           <button onClick={() => handleDelete()}>Delete</button>
         ) : null}
         {parent_reply_id === null && (
-          <span className="flex flex-row flex-1 gap-3">
+          <span className="flex flex-1 flex-row gap-3">
             <button onClick={() => handleLike()}>
               {isLiked ? "Unlike" : "Like"} ({likes})
             </button>
@@ -165,7 +169,7 @@ export default function Reply({
       {input.map((i) => (
         <form
           key={i}
-          className="w-full mt-2 flex flex-1 flex-row gap-2"
+          className="mt-2 flex w-full flex-1 flex-row gap-2"
           action="/api/create/reply"
           method="post"
         >
@@ -181,7 +185,7 @@ export default function Reply({
             placeholder="Write a reply here."
             name="reply"
             onChange={(e) => setReply(e.target.value)}
-            className="border-2 border-gray-300 break-all w-full background-transparent resize-y reply"
+            className="background-transparent reply w-full resize-y break-all border-2 border-gray-300"
           />
           <input type="submit" value="Reply" />
         </form>

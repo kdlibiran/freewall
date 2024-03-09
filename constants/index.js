@@ -24,9 +24,5 @@ export const sidebarLinks = [
     route: "/saved",
     label: "Saved Posts",
   },
-  {
-    imgURL: "/assets/icons/settings.svg",
-    route: "/settings",
-    label: "Settings",
-  },
+
 ];
